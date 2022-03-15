@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme();
+
 function LoginForm({onLogin}) {
 
     const [username, setUsername] = useState("");
@@ -85,7 +87,7 @@ function LoginForm({onLogin}) {
             />
              <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Login"}</Button>
                 {errors.map(error => (
-                    <Alert className="mt-3" variant="danger" key={error}>{error}</Alert>
+                    <Alert className="mt-3" severity="error" key={error}>{error}</Alert>
                 ))}
           </Box>
         </Box>

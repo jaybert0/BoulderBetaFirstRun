@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import './App.css';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert';
+import { Alert } from '@mui/material';
+import Login from './Login'
 
 
 
@@ -35,7 +36,7 @@ function App() {
   if (!user) return (
     <>
     <Container>
-      <Alert className="mt-3" variant="primary" >Please Login OR Signup To Create A New Account</Alert>
+      <Alert className="mt-3" severity="info" >Please Login OR Signup To Create A New Account</Alert>
     </Container>
     <Login onLogin={setUser}/>
     </>
@@ -43,9 +44,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit and save to reload.
         </p>
         <a
           className="App-link"

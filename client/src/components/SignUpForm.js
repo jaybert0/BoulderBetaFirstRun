@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useState } from "react";
 import Alert from '@mui/material/Alert';
 
+const theme = createTheme();
 
 function SignUpForm({onLogin}){
     const [email, setEmail] = useState("");
@@ -123,7 +124,7 @@ function SignUpForm({onLogin}){
               </Grid>
               <Button variant="dark" type="submit">{isLoading ? "Loading..." : "Login"}</Button>
                 {errors.map(error => (
-                    <Alert className="mt-3" variant="danger" key={error}>{error}</Alert>
+                    <Alert severity="error" className="mt-3" key={error}>{error}</Alert>
                 ))}
               {/* <Grid container justifyContent="flex-end">
                 <Grid item>

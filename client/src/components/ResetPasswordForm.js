@@ -14,6 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Alert from '@mui/material/Alert';
 
+const theme = createTheme();
+
+
 function ResetPasswordForm({setShowResetForm}){
 
     const [username, setUsername] = useState("");
@@ -24,7 +27,7 @@ function ResetPasswordForm({setShowResetForm}){
     function handleResetPasswordForm(e){
         e.preventDefault();
         const newPassword = {
-            email: email,
+            username: username,
             password: password
         }
 
@@ -59,12 +62,12 @@ function ResetPasswordForm({setShowResetForm}){
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value = {email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              value = {username}
+              onChange={(e) => setUsername(e.target.value)}
               autoFocus
             />
             <TextField
@@ -80,7 +83,7 @@ function ResetPasswordForm({setShowResetForm}){
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Reset"}</Button>
-                {error.length > 0 ? <Alert className="mt-3" variant="danger">{error}</Alert> : null}
+                {error.length > 0 ? <Alert severity="error" className="mt-3" >{error}</Alert> : null}
           </Box>
         </Box>
       </Container>
