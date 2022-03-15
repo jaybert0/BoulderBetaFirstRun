@@ -1,9 +1,22 @@
 import React, {useState} from 'react';
-import { Form, Button, Alert} from 'react-bootstrap'
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
 
 function ResetPasswordForm({setShowResetForm}){
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -30,32 +43,48 @@ function ResetPasswordForm({setShowResetForm}){
     }
 
     return (
-        <Form onSubmit={handleResetPasswordForm}>
-            <Form.Group className="mb-3">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control 
-                        id="email" 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        autoComplete="off"
-                        value = {email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                    <Form.Label>New Password</Form.Label>
-                    <Form.Control 
-                        id="password" 
-                        type="password" 
-                        placeholder="Enter New Password" 
-                        autoComplete="current-password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button variant="dark" type="submit">{isLoading ? "Loading..." : "Reset"}</Button>
+        <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box component="form" onSubmit={handleResetPasswordForm} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              value = {email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Enter New Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Reset"}</Button>
                 {error.length > 0 ? <Alert className="mt-3" variant="danger">{error}</Alert> : null}
-        </Form>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
     )
 }
 
