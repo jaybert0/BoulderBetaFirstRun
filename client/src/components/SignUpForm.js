@@ -1,14 +1,24 @@
-
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useState } from "react";
-import { Container, Form, Button, Alert } from 'react-bootstrap'
+
 
 function SignUpForm({onLogin}){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [address, setAddress] = useState("");
-    const [phone, setPhone] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -24,8 +34,6 @@ function SignUpForm({onLogin}){
                 username,
                 password,
                 password_confirmation: passwordConfirmation,
-                address,
-                phone
             })
         }).then((r) => {
             setIsLoading(false);
@@ -38,81 +46,95 @@ function SignUpForm({onLogin}){
     }
 
     return (
-        <Container>
-            <h1>Sign Up Form</h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control 
-                        id="email" 
-                        type="email" 
-                        placeholder="Enter email" 
-                        autoComplete="off"  
-                        value = {email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control 
-                        id="username" 
-                        type="text" 
-                        placeholder="Enter username" 
-                        autoComplete="off"
-                        value = {username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control 
-                        id="password" 
-                        type="password" 
-                        placeholder="Password" 
-                        autoComplete="current-password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Password Confirmation</Form.Label>
-                    <Form.Control 
-                        id="password_confirmation" 
-                        type="password" 
-                        placeholder="Confirm Password" 
-                        autoComplete="current-password" 
-                        value={passwordConfirmation}
-                        onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control 
-                        id="address" 
-                        type="text" 
-                        placeholder="Address" 
-                        autoComplete="off" 
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control 
-                        id="phone" 
-                        type="text" 
-                        placeholder="Phone" 
-                        autoComplete="off" 
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                </Form.Group>
-                <Button variant="dark" type="submit">{isLoading ? "Loading..." : "Login"}</Button>
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+              <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    type='email'
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    value = {email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField
+                    type='text'
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    value = {username}
+                    onChange={(e) => setUsername(e.target.value)}
+
+                  />
+                </Grid>
+               
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password Confirmation"
+                    type="password"
+                    id="password-confirmation"
+                    autoComplete="current-password"
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Button variant="dark" type="submit">{isLoading ? "Loading..." : "Login"}</Button>
                 {errors.map(error => (
                     <Alert className="mt-3" variant="danger" key={error}>{error}</Alert>
                 ))}
-            </Form>
+              {/* <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid> */}
+            </Box>
+          </Box>
         </Container>
+      </ThemeProvider>
     )
 }
 
