@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
-    "client": "^0.0.1"
+    "client": "^0.0.1",
+    "react-router-dom": "^6.2.2"
   }
 }
