@@ -43,6 +43,7 @@ function SignUpForm({onLogin}){
                 r.json().then((user) => onLogin(user));
             } else {
                 r.json().then((err) => setErrors(err.errors));
+                console.log(errors)
             }
         })
     }
@@ -63,7 +64,7 @@ function SignUpForm({onLogin}){
               <LockOutlinedIcon />
             </Avatar> */}
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign Up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -122,7 +123,7 @@ function SignUpForm({onLogin}){
                   />
                 </Grid>
               </Grid>
-              <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Login"}</Button>
+              <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
                 {errors.map(error => (
                     <Alert severity="error" className="mt-3" key={error}>{error}</Alert>
                 ))}
