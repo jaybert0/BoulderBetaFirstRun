@@ -17,7 +17,7 @@ import Alert from '@mui/material/Alert';
 const theme = createTheme();
 
 function SignUpForm({onLogin}){
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -25,28 +25,27 @@ function SignUpForm({onLogin}){
     const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e){
-        e.preventDefault();
-        setErrors([]);
-        setIsLoading(true);
-        fetch("/signup", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                email,
-                username,
-                password,
-                password_confirmation: passwordConfirmation,
-            })
-        }).then((r) => {
-            setIsLoading(false);
-            if (r.ok) {
-                r.json().then((user) => onLogin(user));
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-                console.log(errors)
-            }
-        })
-    }
+      e.preventDefault();
+      setErrors([]);
+      setIsLoading(true);
+      fetch("/signup", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+              email,
+              username,
+              password,
+              password_confirmation: passwordConfirmation,
+          })
+      }).then((r) => {
+          setIsLoading(false);
+          if (r.ok) {
+              r.json().then((user) => onLogin(user));
+          } else {
+              r.json().then((err) => setErrors(err.errors));
+          }
+      })
+  }
 
     return (
         <ThemeProvider theme={theme}>

@@ -18,27 +18,27 @@ const theme = createTheme();
 
 function LoginForm({onLogin}) {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    function handleSubmit(e){
-        e.preventDefault();
-        setIsLoading(true);
-        fetch("/login", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({ username, password })
-        }).then ((r) => {
-            setIsLoading(false);
-            if (r.ok){
-                r.json().then((user) => onLogin(user));
-            } else {
-                r.json().then((err) => setErrors(err.errors));
-            }
-        });
-    }
+  function handleSubmit(e){
+      e.preventDefault();
+      setIsLoading(true);
+      fetch("/login", {
+          method: 'POST',
+          headers: { "Content-Type": "application/json"},
+          body: JSON.stringify({ email, password })
+      }).then ((r) => {
+          setIsLoading(false);
+          if (r.ok){
+              r.json().then((user) => onLogin(user));
+          } else {
+              r.json().then((err) => setErrors(err.errors));
+          }
+      });
+  }
     
     return (
         <ThemeProvider theme={theme}>
@@ -63,14 +63,13 @@ function LoginForm({onLogin}) {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
               autoFocus
-              value = {username}
-
-              onChange={(e) => setUsername(e.target.value)}
+              value = {email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
