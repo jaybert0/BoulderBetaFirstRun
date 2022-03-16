@@ -124,9 +124,9 @@ function SignUpForm({onLogin}){
                 </Grid>
               </Grid>
               <Button variant="contained" type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
-                {errors.map(error => (
+                {/* {errors.map(error => (
                     <Alert severity="error" className="mt-3" key={error}>{error}</Alert>
-                ))}
+                ))} */}
               {/* <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="#" variant="body2">
